@@ -375,7 +375,7 @@ CATS.forEach(c => {
   filtersEl.appendChild(b);
 });
 document.querySelectorAll('.nav nav a[data-cat]').forEach(a => {
-  a.onclick = e => { e.preventDefault(); setCat(a.dataset.cat); };
+  a.onclick = e => { e.preventDefault(); mmHideNow(); setCat(a.dataset.cat); };
 });
 /* mega menu — hover a nav item, see its products */
 const mm = document.getElementById('megamenu');
@@ -396,7 +396,7 @@ function mmShow(cat){
       <div class="p">${fmt(p.price)}${p.compare ? `<s>${fmt(p.compare)}</s>` : ''}</div>
     </div>`;
   }).join('');
-  mmAll.onclick = e => { e.preventDefault(); mmHide(); setCat(cat); };
+  mmAll.onclick = e => { e.preventDefault(); mmHideNow(); setCat(cat); };
   mm.classList.add('open');
   document.querySelectorAll('.nav nav a[data-cat]').forEach(x => x.classList.toggle('hot', x.dataset.cat === cat));
 }
@@ -405,6 +405,11 @@ function mmHide(){
     mm.classList.remove('open');
     document.querySelectorAll('.nav nav a[data-cat]').forEach(x => x.classList.remove('hot'));
   }, 120);
+}
+function mmHideNow(){
+  clearTimeout(mmTimer);
+  mm.classList.remove('open');
+  document.querySelectorAll('.nav nav a[data-cat]').forEach(x => x.classList.remove('hot'));
 }
 document.querySelectorAll('.nav nav a[data-cat]').forEach(a => {
   a.addEventListener('mouseenter', () => mmShow(a.dataset.cat));
