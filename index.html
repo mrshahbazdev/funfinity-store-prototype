@@ -93,7 +93,7 @@ h1,h2,h3,.disp{font-family:Archivo,sans-serif}
 .feat .fcard .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .feat .fcard:hover .img img{transform:scale(1.07)}
 .feat .fcard .body{padding:12px 13px 14px}
-.feat .fcard .t{font-size:13.5px;font-weight:600;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feat .fcard .t{font-size:13.5px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:36px}
 .feat .fcard .p{font-size:14px;font-weight:800;margin-top:5px}
 .feat .fcard .p s{color:#9d968c;font-weight:500;font-size:12px;margin-left:5px}
 .feat .fcard .add{margin-top:10px;width:100%;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:9px;font-size:13px;font-weight:700;transition:background .2s}
@@ -218,7 +218,9 @@ h1,h2,h3,.disp{font-family:Archivo,sans-serif}
 .rel h2{font-size:clamp(24px,3vw,34px);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:22px}
 .rel h2 .serif{font-size:.85em;text-transform:none}
 /* ===== PAGE: collection ===== */
-.coll-hero{background:var(--ink);color:#fff;border-radius:22px;padding:44px 40px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.coll-hero{background:var(--ink);color:#fff;border-radius:22px;padding:44px 40px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.coll-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,17,16,.88) 0%,rgba(17,17,16,.72) 60%,rgba(17,17,16,.45) 100%)}
+.coll-hero>*{position:relative;z-index:1}
 .coll-hero h1{font-size:clamp(34px,4.4vw,54px);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.02em}
 .coll-hero h1 .serif{font-size:.8em;text-transform:none;color:#ffb3a6}
 .coll-hero p{color:#d8d2c8;font-size:14.5px;line-height:1.6;max-width:420px}
@@ -353,9 +355,9 @@ footer .fine a:hover{color:#fff}
     <a class="logo" href="#/">FUNFINITY<i>.</i><small>Women's Fashion · Egypt</small></a>
     <label class="hd-search"><span>🔍</span><input id="q" type="text" placeholder="Search abayas, kaftans, dresses…"></label>
     <div class="hd-icons">
-      <button class="icobtn" title="Account" onclick="toast('Accounts come with the real store — this is a prototype.')">👤</button>
-      <button class="icobtn" title="Wishlist" onclick="toast('Wishlist comes with the real store — this is a prototype.')">♡<b id="wishCount" style="display:none">0</b></button>
-      <button class="icobtn" title="Cart" onclick="toggleCart(true)">🛍<b id="cartCount">0</b></button>
+      <button class="icobtn" title="Account" onclick="toast('Accounts come with the real store — this is a prototype.')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.5 3.8-5 7-5s5.8 1.5 7 5"/></svg></button>
+      <button class="icobtn" title="Wishlist" onclick="toast('Wishlist comes with the real store — this is a prototype.')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.5 5 8 5c1.6 0 3.1.8 4 2.1C12.9 5.8 14.4 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.7-3.5 6.9-8.5 10.9z"/></svg><b id="wishCount" style="display:none">0</b></button>
+      <button class="icobtn" title="Cart" onclick="toggleCart(true)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5.5 8h13l-1 12.5h-11L5.5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><b id="cartCount">0</b></button>
     </div>
   </div></div>
   <nav class="hd-nav"><div class="in" id="mainNav"></div></nav>
@@ -475,7 +477,6 @@ footer .fine a:hover{color:#fff}
   </ul>
   <h2>How we work</h2>
   <p>New styles land every week. Every piece is photographed as it is — what you see is what arrives. Prices are in Egyptian pounds, delivery is free over EGP 1,000, and you can pay cash on delivery.</p>
-  <div class="notebox">This is a prototype storefront built from the real Funfinity catalogue (funfinity-fashion.com). The story above is a draft — tell us what to change and we'll rewrite it in your voice.</div>
   <p style="margin-top:22px"><a class="btn dark" href="#/">Shop the collection →</a></p>
 </div></div>
 
@@ -493,7 +494,6 @@ footer .fine a:hover{color:#fff}
   <p>You can pay in cash when your order arrives. Card payment on delivery is also available in Cairo &amp; Giza.</p>
   <h2>Tracking</h2>
   <p>Once your order ships, you'll get a message with your tracking link. You can also ask us about your order any time through the contact page.</p>
-  <div class="notebox">Delivery times and fees above are prototype placeholders — confirm the real courier rates and we'll update this page.</div>
 </div></div>
 
 <div class="view" id="view-returns"><div class="info-page fadein">
@@ -509,7 +509,6 @@ footer .fine a:hover{color:#fff}
   <p>Message us with your order number and the piece you'd like to exchange. We'll arrange a courier pickup and send your new size. The exchange delivery fee is EGP 50.</p>
   <h2>Refunds</h2>
   <p>Refunds go back to your original payment method within 3–5 business days of us receiving the return. Cash-on-delivery orders are refunded by bank transfer or wallet credit — your choice.</p>
-  <div class="notebox">Return policy above is a prototype draft — confirm the real policy and we'll update this page.</div>
 </div></div>
 
 <div class="view" id="view-contact"><div class="info-page fadein">
@@ -522,7 +521,6 @@ footer .fine a:hover{color:#fff}
     <div class="field"><label>Message</label><textarea rows="5" required placeholder="How can we help?"></textarea></div>
     <button class="btn dark" type="submit">Send message →</button>
   </form>
-  <div class="notebox">Email: <b>support@funfinity-fashion.com</b> (placeholder — confirm the real support email).<br>Store: <b>funfinity-fashion.com</b> · Cairo, Egypt</div>
 </div></div>
 
 <div class="view" id="view-size"><div class="info-page fadein">
@@ -537,7 +535,6 @@ footer .fine a:hover{color:#fff}
   </table>
   <h2>How to measure</h2>
   <p>Measure over light clothing, tape flat but not tight. If you're between sizes, size up for abayas and kaftans — they're made to drape, not cling.</p>
-  <div class="notebox">Size chart above is a prototype draft built from the fit notes in the catalogue (e.g. "Size 1 fits 55–75 kg"). Confirm the real measurements and we'll update it.</div>
 </div></div>
 
 <!-- ================= FOOTER ================= -->
@@ -598,7 +595,7 @@ footer .fine a:hover{color:#fff}
     </div>
     <div>
       <h4>Get in touch</h4>
-      <p>funfinity-fashion.com<br>Cairo, Egypt<br><br>Support: support@funfinity-fashion.com<br><span style="font-size:12.5px">(placeholder — confirm the real email)</span></p>
+      <p>funfinity-fashion.com<br>Cairo, Egypt<br><br>Support: support@funfinity-fashion.com</p>
     </div>
   </div>
   <div class="big">FUNFINITY<i>.</i> <span class="serif">fw26</span></div>
@@ -893,7 +890,7 @@ function renderCollection(cat){
   const maxP = list.length ? Math.max(...list.map(p => p.price)) : 0;
   box.innerHTML = `<div class="fadein">
     <div class="crumbs"><a href="#/">Home</a> &nbsp;/&nbsp; ${esc(cat)}</div>
-    <div class="coll-hero">
+    <div class="coll-hero" style="background-image:url('${list[0] ? list[0].image : ''}')">
       <div><div class="kicker">Funfinity — FW26</div><h1>${esc(cat === 'All' ? 'Shop all' : cat)}</h1></div>
       <div style="text-align:right"><div class="cnt">${list.length} styles · ${onSale} on sale</div><p style="margin-top:8px">EGP ${minP.toLocaleString('en-US')} – EGP ${maxP.toLocaleString('en-US')}</p></div>
     </div>
