@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funfinity — Women's Fashion | New Season Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1917;--mut:#78716c;--bg:#faf7f2;--card:#fff;--line:#e7e0d6;--acc:#9c3d54;--acc2:#b4552d;--green:#15803d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.topbar{background:var(--ink);color:#f5f0e8;text-align:center;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;padding:9px 12px}
+header{position:sticky;top:0;z-index:40;background:rgba(250,247,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:28px;padding:14px 20px}
+.logo{font-family:"Playfair Display",serif;font-size:30px;font-weight:700;letter-spacing:.02em}
+.logo span{color:var(--acc)}
+.nav nav{display:flex;gap:22px;font-size:14px;font-weight:500}
+.nav nav a{padding:6px 2px;border-bottom:2px solid transparent}
+.nav nav a:hover{border-color:var(--acc)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-width:230px}
+.search input{border:0;outline:0;font-size:14px;width:100%;background:transparent}
+.cartbtn{position:relative;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:600}
+.cartbtn b{position:absolute;top:-7px;right:-7px;background:var(--acc);color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.hero{max-width:1240px;margin:0 auto;padding:44px 20px 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+.hero h1{font-family:"Playfair Display",serif;font-size:56px;line-height:1.05;font-weight:700}
+.hero h1 em{color:var(--acc);font-style:normal}
+.hero p{color:var(--mut);font-size:17px;line-height:1.65;margin:16px 0 24px;max-width:520px}
+.hero .cta{display:flex;gap:12px}
+.btn{display:inline-block;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:13px 26px;font-size:15px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.heroimg{border-radius:20px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.16);position:relative}
+.heroimg img{width:100%;height:460px;object-fit:cover;display:block}
+.heroimg .tag{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.94);border-radius:12px;padding:10px 14px;font-size:13px}
+.heroimg .tag b{display:block;font-size:15px}
+.stats{display:flex;gap:34px;margin-top:26px}
+.stats b{font-family:"Playfair Display",serif;font-size:26px;display:block}
+.stats span{font-size:12.5px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.section{max-width:1240px;margin:0 auto;padding:26px 20px 60px}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sec-head h2{font-family:"Playfair Display",serif;font-size:32px}
+.sec-head p{color:var(--mut);font-size:14px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:500}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sortrow{display:flex;align-items:center;gap:10px;margin:14px 0 18px;font-size:13.5px;color:var(--mut)}
+.sortrow select{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13.5px;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.10)}
+.card .img{position:relative;aspect-ratio:4/5;overflow:hidden;background:#f1ebe2;cursor:pointer}
+.card .img img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:10px;left:10px;background:var(--acc);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:5px 9px;border-radius:999px}
+.badge.new{background:var(--green)}
+.card .body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cat{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-weight:700}
+.title{font-size:15px;font-weight:600;line-height:1.35}
+.price{font-size:16px;font-weight:700}
+.price s{color:var(--mut);font-weight:500;font-size:13.5px;margin-left:6px}
+.price .save{color:var(--green);font-size:12.5px;font-weight:600;margin-left:6px}
+.opts{font-size:12.5px;color:var(--mut)}
+.add{margin-top:auto;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:10px;font-size:14px;font-weight:600}
+.add:hover{background:var(--acc)}
+.empty{padding:60px 0;text-align:center;color:var(--mut)}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
+.modal.open{display:flex}
+.sheet{background:#fff;border-radius:20px;max-width:880px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr}
+.sheet img{width:100%;height:100%;object-fit:cover;min-height:420px}
+.sheet .info{padding:28px}
+.sheet .info h3{font-family:"Playfair Display",serif;font-size:28px;line-height:1.2}
+.sheet .info .desc{color:var(--mut);font-size:14px;line-height:1.65;margin:12px 0}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
+.pill{border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;font-size:13px;background:#fff}
+.pill.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.qty{display:flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;width:max-content}
+.qty button{border:0;background:#fff;width:38px;height:40px;font-size:18px}
+.qty span{min-width:36px;text-align:center;font-weight:600}
+.close{position:absolute;top:14px;right:16px;background:#fff;border:0;border-radius:999px;width:36px;height:36px;font-size:18px;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+/* cart drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:380px;max-width:92vw;background:#fff;z-index:90;box-shadow:-16px 0 40px rgba(0,0,0,.18);transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer header{position:static;background:#fff;border-bottom:1px solid var(--line);padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.drawer header h3{font-family:"Playfair Display",serif;font-size:22px}
+.drawer .items{flex:1;overflow:auto;padding:14px 20px;display:flex;flex-direction:column;gap:14px}
+.ci{display:flex;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px}
+.ci img{width:64px;height:80px;object-fit:cover;border-radius:8px}
+.ci .t{font-size:14px;font-weight:600}
+.ci .p{font-size:13.5px;color:var(--mut);margin-top:4px}
+.ci .rm{margin-left:auto;border:0;background:none;color:var(--acc);font-size:13px;font-weight:600}
+.drawer .foot{border-top:1px solid var(--line);padding:18px 20px}
+.drawer .foot .row{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}
+.drawer .foot .btn{width:100%}
+footer{background:var(--ink);color:#e7e0d6;margin-top:20px}
+footer .in{max-width:1240px;margin:0 auto;padding:44px 20px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+footer h4{font-family:"Playfair Display",serif;color:#fff;font-size:20px;margin-bottom:10px}
+footer p,footer li{font-size:14px;line-height:1.7;color:#c9c0b4;list-style:none}
+footer .fine{border-top:1px solid #3a352f;padding:16px 20px;text-align:center;font-size:12.5px;color:#a39a8d}
+.proto{max-width:1240px;margin:0 auto;padding:10px 20px 0;font-size:12.5px;color:var(--mut)}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero h1{font-size:40px}.grid{grid-template-columns:repeat(2,1fr)}.sheet{grid-template-columns:1fr}.nav nav{display:none}.search{min-width:0;flex:1}}
+</style>
+</head>
+<body>
+<div class="topbar">Winter Collection &nbsp;·&nbsp; New arrivals &nbsp;·&nbsp; Free delivery across Egypt on orders over EGP 1,000</div>
+<header><div class="nav">
+  <a class="logo" href="#">Funfinity<span>.</span></a>
+  <nav>
+    <a href="#" data-cat="All">Shop All</a>
+    <a href="#" data-cat="Abayas">Abayas</a>
+    <a href="#" data-cat="Kaftans">Kaftans</a>
+    <a href="#" data-cat="Dresses">Dresses</a>
+    <a href="#" data-cat="Sets &amp; Suits">Sets</a>
+  </nav>
+  <label class="search"><span>🔍</span><input id="q" type="text" placeholder="Search products…"></label>
+  <button class="cartbtn" id="cartBtn">🛍 Cart <b id="cartCount">0</b></button>
+</div></header>
+
+<div class="proto">PROTOTYPE — new theme preview for the Funfinity store. Prices in EGP. Product photos, titles and prices are the real catalogue from funfinity-fashion.com.</div>
+
+<section class="hero">
+  <div>
+    <h1>Modest fashion,<br><em>made for winter.</em></h1>
+    <p>Abayas, kaftans, dresses, hoodies and cosy sets — the full Funfinity catalogue in one elegant new store. Real products, real prices, ready to shop.</p>
+    <div class="cta">
+      <button class="btn" onclick="scrollToGrid()">Shop the collection ↓</button>
+      <button class="btn ghost" onclick="setCat('Abayas')">Abayas</button>
+    </div>
+    <div class="stats">
+      <div><b>60</b><span>Products</span></div>
+      <div><b>283</b><span>Variants</span></div>
+      <div><b>44</b><span>On sale</span></div>
+    </div>
+  </div>
+  <div class="heroimg">
+    <img id="heroImg" src="" alt="Featured — Velvet Abaya">
+    <div class="tag"><b>Featured</b><span id="heroTag">Velvet Abaya — EGP 1,100</span></div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="sec-head"><h2>Shop the collection</h2><p id="count"></p></div>
+  <div class="filters" id="filters"></div>
+  <div class="sortrow">
+    <label>Sort by</label>
+    <select id="sort">
+      <option value="feat">Featured</option>
+      <option value="low">Price: low to high</option>
+      <option value="high">Price: high to low</option>
+      <option value="sale">Biggest discount</option>
+    </select>
+    <span id="activeCat"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">No products match — try a different search or category.</div>
+</section>
+
+<div class="modal" id="modal"><div class="sheet" style="position:relative">
+  <button class="close" onclick="closeModal()">✕</button>
+  <img id="mImg" src="" alt="">
+  <div class="info">
+    <div class="cat" id="mCat"></div>
+    <h3 id="mTitle"></h3>
+    <div class="price" id="mPrice" style="font-size:22px;margin-top:8px"></div>
+    <p class="desc" id="mDesc"></p>
+    <div id="mOpts"></div>
+    <div style="display:flex;gap:12px;align-items:center;margin:6px 0 16px">
+      <div class="qty"><button onclick="chQty(-1)">−</button><span id="qty">1</span><button onclick="chQty(1)">+</button></div>
+      <button class="btn" id="mAdd">Add to cart</button>
+    </div>
+    <p style="font-size:13px;color:var(--mut)">Free delivery across Egypt on orders over EGP 1,000 · Cash on delivery available</p>
+  </div>
+</div></div>
+
+<div class="drawer" id="drawer">
+  <header><h3>Your cart</h3><button class="close" style="position:static;box-shadow:none" onclick="toggleCart(false)">✕</button></header>
+  <div class="items" id="cartItems"></div>
+  <div class="foot"><div class="row"><span>Subtotal</span><span id="cartTotal">EGP 0</span></div>
+  <button class="btn" onclick="alert('Prototype — checkout comes with the real store.')">Checkout →</button></div>
+</div>
+
+<footer><div class="in">
+  <div><h4>Funfinity.</h4><p>Women's fashion from Egypt — abayas, kaftans, dresses, hoodies and cosy winter sets. This page is a theme prototype built from the real Funfinity catalogue.</p></div>
+  <div><h4>Shop</h4><ul><li>Abayas</li><li>Kaftans</li><li>Dresses</li><li>Hoodies &amp; Sweatshirts</li><li>Sets &amp; Suits</li></ul></div>
+  <div><h4>Help</h4><ul><li>Shipping &amp; delivery</li><li>Returns &amp; exchange</li><li>Size guide</li><li>Contact us</li></ul></div>
+</div><div class="fine">© 2026 Funfinity — theme prototype. Prices in EGP.</div></footer>
+
+<script>
+const PRODUCTS = [{"handle": "winter-fur-blanket", "title": "Cozy shrug Winter Blanket", "category": "Home & Winter", "price": 590.0, "compare": 950.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/1000725989.png?v=1794195029", "desc": "بخامة فرو ناعمة من الناحيتين، بملمس كثيف وملحوظة ومبطنة بالفرو من الداخل لتوفير دفء وراحة مثالية خلال فصل الشتاء. تتميز بتصميم واسع Oversize يمنحك حرية وراحة في الاستخدام، ومناسبة للرجال والسيدات. تفاصيل المنتج: - Materi", "opt1": ["One size"], "opt2": ["Black", "Burgundy", "Gray", "Offwhite", "Pink", "Red"]}, {"handle": "بنطلون-كاروه", "title": "بنطلون كاروه", "category": "Pants & Skirts", "price": 400.0, "compare": 650.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/WhatsAppImage2026-11-02at6.36.17AM_2.jpg?v=1793594741", "desc": "بنطلون كاروه Wide Leg بتصميم عصري وخامة قطن فلانيل شتوي ناعمة ودافئة، يجمع بين الراحة والأناقة. ❤️ مريح وبجيب جانبي عملي. اللون: أحمر × أسود. Size 1 :55 - 75 Size 2 : 75 - 95", "opt1": ["Size 1 ( Fits 55~75KG )", "Size 2( Fits 75~100 KG )"], "opt2": ["Red", "White"]}, {"handle": "velvet-abaya", "title": "Velvet Abaya", "category": "Abayas", "price": 1100.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/file_000000005448820a9f7e41a762782bf5.png?v=1793594481", "desc": "عباية أنيقة باللون الأسود، مصنوعة من قماش القطيفة الفاخر، بتصميم انسيابي وأكمام واسعة تمنحكِ إطلالة راقية ومميزة. خيار مثالي للمناسبات والسهرات، وتنسّق بسهولة مع مختلف الإكسسوارات.♥️✨ الخامه قطيفه ناعمه Size: One Size لح", "opt1": ["One size"], "opt2": ["Black"]}, {"handle": "rosaline-skirt", "title": "Rosaline Skirt", "category": "Pants & Skirts", "price": 650.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/d29fb53f0dc91b3d36fb53e622bdec52.png?v=1793239561", "desc": "جيبة روزالين كلوش – Rosaline Skirt 🤎 جيبة كلوش واسعة وانسيابية، بتديكي لوك أنيق وأنثوي، وسهلة التنسيق مع مختلف البلوزات والكارديجان لإطلالة كاجوال أو شيك. الخامة: روزالين مستورد. القَصّة: كلوش واسعة.", "opt1": ["One size"], "opt2": ["Beige", "Off white"]}, {"handle": "chenille-dress", "title": "Chenille Dress", "category": "Dresses", "price": 1350.0, "compare": 1500.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/o8bi2kkqxpamsd0wdwpo_1_106f6326-1e88-467f-976d-58ee6623efcf.jpg?v=1793236965", "desc": "فستان من خامة الشانيلا المستوردة، ناعم ودافي من غير تقل. له حبل من الخلف للتضيق علي شيب الجسم ، وفتحة جانبية بتظهر طبقة داخلية بلون مختلف، وأكمام واسعة وسوستة دهبي بتفصيلة مميزة. مناسب للخروجات والمناسبات واللبس اليومي ف", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Gray", "navy blue"]}, {"handle": "fox-cardigan-with-scarf", "title": "Fox Cardigan with scarf", "category": "Jackets & Cardigans", "price": 960.0, "compare": 1350.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/355114.jpg?v=1792651886", "desc": "كارديجان فروي كبير الحجم كارديجان فروي مريح وواسع مصمم لسهولة ارتدائه فوق طبقات أخرى من الملابس. الطول: 126 سم مقاس واسع فري سايز ل 90 كيلو يأتي مع اسكارف مطابق مصنوع من نفس القماش ناعم ودافئ ومثالي لفصل الشتاء", "opt1": ["One size"], "opt2": ["Brown", "Burgundy", "Gray", "Pink", "mint green"]}, {"handle": "oversize-sweatshirt", "title": "Oversize Sweatshirt", "category": "Hoodies & Sweatshirts", "price": 600.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20261017_030348.png?v=1792200607", "desc": "Oversize Sweatshirt – سويت شيرت شتوي مبطن 🤍 القطعة اللي هتغيّر شكل اللوك الكاجوال بتاعك وتخليكي شيك ومريحة طول اليوم! 😍 ✨ تفاصيل المنتج: الخامة: قطن مبطن ناعم ومريح. القصة: Oversize واسعة بستايل عصري. التصميم: رقبة دائري", "opt1": ["Size 1 ( Fits 50~75 KG )", "Size 2 ( Fits 75~95 KG )"], "opt2": ["Black", "Brown", "Burgundy", "Pink", "navy blue"]}, {"handle": "oversize-hoodie-سوستة", "title": "Oversize Hoodie سوستة", "category": "Hoodies & Sweatshirts", "price": 750.0, "compare": 1200.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20261017_025709.png?v=1792200009", "desc": "9Oversize Hoodie سوستة 🖤 خلي إطلالتك مريحة وشيك في نفس الوقت مع الـ Zip Hoodie اللي هتحبيه من أول لبسة! 😍 ✨ المميزات: الخامة: قطن مبطن، مناسب لأجواء الخريف والشتاء. التصميم: Oversize بقصة واسعة ومريحة. التفاصيل: سوستة أم", "opt1": ["Size 1 ( Fits 50~75 KG )", "Size 2 ( Fits 75~95 KG )"], "opt2": ["Black", "Off white", "Pink", "navy blue"]}, {"handle": "oversize-hoodie", "title": "Oversize Hoodie", "category": "Hoodies & Sweatshirts", "price": 750.0, "compare": 1290.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20261017_031849.png?v=1792199296", "desc": "Oversize Hoodie – هودي شتوي مبطن 🤍 هودي أوفر سايز بخامة قطن مبطنة، يجمعلك بين الدفا والراحة والستايل الكاجوال اللي يليق على كل خروجاتك. ✨ تفاصيل المنتج: الخامة: قطن مبطن ناعم ومريح. القصة: Oversize واسعة وعصرية. التصميم:", "opt1": ["Size 1 ( Fits 50~75 KG )", "Size 2( Fits 75~95KG )"], "opt2": ["Black", "Burgundy", "Off white", "Pink", "navy blue"]}, {"handle": "untitled-oct5_22-45-57", "title": "high waist sweatshirt", "category": "Hoodies & Sweatshirts", "price": 700.0, "compare": 1250.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_eb9c2bd3-c675-45eb-8cd2-e59b7699c98b.jpg?v=1791229762", "desc": "سويت شيرت بقصة مميزة ، خامة ميلتون قطن ناعمة جدا مناسب الخريف والشتاء . أكمام واسعة بكنار مرن، وحافة خام بتدّي القطعة لمسة عصرية بسيطة. المقاسات (حسب الوزن بالكيلو): مقاس 1: من 55 لـ 70 مقاس 2: من 70 لـ 85 مقاس 3: من 85 ", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 70~85 KG )", "Size 3 ( Fits 85~100 KG )"], "opt2": ["Baby Blue", "Black", "Brown", "Off white", "Pink", "navy blue"]}, {"handle": "aria-cape-jacket", "title": "Aria Cape Jacket", "category": "Jackets & Cardigans", "price": 750.0, "compare": 1100.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20261004_205642.jpg?v=1791144858", "desc": "Aria Cape Jacket جاكيت بقصة الكاب الواسعة اللي بتنسدل بنعومة وبتدّيكي إطلالة راقية من أول نظرة. مصنوع من قماش الجوخ التقيل اللي بيدفّي وبيحافظ على شكله، وحزام بيحدد الوسط ويظبط القصة على جسمك. الياقة العالية بزرار بتدي ا", "opt1": ["Size 1 ( Fits 50~75 KG )", "Size 2 ( Fits 75~95 KG )"], "opt2": ["Beige", "Black", "Burgundy", "Dark chocolate", "Havan"]}, {"handle": "عباية-سلطانة-بيزك-عباية", "title": "(عباية سلطانة (بيزك + عباية", "category": "Abayas", "price": 850.0, "compare": 1250.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_20ece557-5a72-41e8-8930-bf40cc9e9030.png?v=1791073630", "desc": "عباية سلطانة : بيزك + عباية بتفصّل جسمك وبتبيّن أنوثتك من غير ما تفقد احتشامك. الطقم من قطعتين: بيزك بكسرات جانبية : بيرسم القوام ويحدد الخصر، وبياقة عالية وكم قصير. وفيه فتحة جانبية بخط أبيض رفيع بتدّيه لمسة مميزة. عباي", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 70~85 KG )", "Size 3 ( Fits 85~100 KG )"], "opt2": ["Black"]}, {"handle": "cotton-t-shirt", "title": "Oversize Cotton T-SHIRT", "category": "T-Shirts", "price": 390.0, "compare": 550.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_498de552-df0a-4fe6-9ac2-a62ab0dbecca.jpg?v=1790455633", "desc": "تيشيرت Cotton Side-Slit 🤍 تيشيرت بتصميم عصري يجمع بين الـ Comfort والستايل، بقصة واسعة مريحة وأكمام واسعة تضيف لمسة مختلفة للوك، مع فتحات جانبية من أسفل تمنح التصميم حركة وشكل أكثر أناقة. مصنوع من قطن الألوان المتوفرة اح", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Pink", "Red", "White", "Yellow", "navy blue"]}, {"handle": "balloon-fit-cotton-pants", "title": "Balloon Fit Cotton Pants", "category": "Pants & Skirts", "price": 850.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260925_22432918.jpg?v=1790369750", "desc": "Balloon Fit Pants بنطلون بتصميم عصري يجمع بين الراحة والستايل ، مصنوع من خامة ميلتون قطن تمنحك إحساسًا ناعمًا ومريحًا، مع تصميم عملي يناسب إطلالاتك اليومية. يتميز البنطلون بـ استك من الأسفل يمنحك إمكانية اختيار اللوك الل", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 75~90 KG )"], "opt2": ["Black", "Brown", "Gray", "Off white", "navy blue"]}, {"handle": "over-size-winter-t-shirt", "title": "Over Size Winter T-SHIRT", "category": "T-Shirts", "price": 550.0, "compare": 750.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_e77a9723-cff3-4f1f-ac8a-a158aa4a5713.jpg?v=1790192064", "desc": "تيشيرت أوفر سايز شتوي بخامة قطن 100% ومبطن من الداخل، مريح ويدّيكي دفا مناسب لأيام الشتاء 🤍 تصميمه بسيط وعملي، ومميز بحبل من الخلف تقدري من خلاله تضبطي الواسع حسب شكل جسمك واللوك اللي بتحبيه. التفاصيل: -ميلتون قطن 100٪ -", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Gray", "Pink", "White", "Yellow"]}, {"handle": "rosalyn-blouse", "title": "Rosalyn Blouse", "category": "Blouses & Shirts", "price": 520.0, "compare": 800.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/file_00000000d4108243976a7ce0f73c4bcd.png?v=1789765612", "desc": "عنوان الأناقة والراحة ✨ استعدي بإطلالة تجمع بين الحشمة والعصرية مع بلوزتنا الطويلة المصنوعة من أجود أنواع الروزالين المستورد . قطعة أساسية في دولابك، صُممت لتمنحك شعوراً بالخفة والنعومة طوال اليوم بفضل خامتها الانسيابية ", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Olive", "Pink", "Yellow", "navy blue"]}, {"handle": "winter-pants", "title": "Winter Milton Pants", "category": "Pants & Skirts", "price": 650.0, "compare": 1000.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260916_222403.png?v=1789591346", "desc": "بنطلون ميلتون قطن 100% بتصميم واسع ومريح، يجمع بين الراحة والستايل في قطعة واحدة 🤍 خامة ناعمة ودافئة، وقصّة عملية تقدري تعتمدي عليها في إطلالاتك اليومية بسهولة. الألوان: أسود – جراي - برجاندي المقاسات: • من 55 لـ 70 كجم ", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 75~90 KG )"], "opt2": ["Black", "Burgundy", "Gray"]}, {"handle": "cotton-hoodie", "title": "Cotton Hoodie", "category": "Hoodies & Sweatshirts", "price": 650.0, "compare": 1000.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260916_222531.png?v=1789591346", "desc": "هودي ميلتون قطن 100% بتصميم مريح وعملي، مناسب للوك الكاجوال اليومي 🤍 خامة ناعمة ودافئة، وقصّة واسعة تخلي اللوك شيك ومريح في نفس الوقت. متاح بـ 4 ألوان: برجاندي – أسود – جراي – بينك 🖤🩷 المقاسات: • من 55 لـ 70 كجم • من 70 ", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 75~90 KG )"], "opt2": ["Black", "Brown", "Burgundy", "Gray", "Pink"]}, {"handle": "oversize-shirt", "title": "Oversize Shirt", "category": "Blouses & Shirts", "price": 550.0, "compare": 750.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/877512488_122128876617280731_8863612347445058866_n.jpg?v=1793463733", "desc": "ستايل مميز يجمع بين الراحة، الاحتشام والأناقة ✨ مصمم بقصة واسعة وتفاصيل بسيطة تخليه قطعة أساسية في دولابك، وتقدري تنسقيه بأكتر من طريقة مع الجينز أو البنطلونات الواسعة أو القماش. التفاصيل: الخامة: كتان إسباني الألوان: أس", "opt1": ["One size"], "opt2": ["Black", "Olive", "Pink", "Red", "Yellow"]}, {"handle": "balloon-pant", "title": "Balloon pant", "category": "Pants & Skirts", "price": 640.0, "compare": 1180.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_5fa2d126-e556-4984-8a8b-07a6ff4a8f96.jpg?v=1787178484", "desc": "— قصة بالون واسعة بخامة جبردين خفيفة واتر بروف ومريحة، مناسبة للبس اليومي والخروجات وسهلة التنسيق مع تيشيرت أو بلوزة أو شيميز. تفاصيل المنتج الخامة: جبردين خفيف القصة: Balloon Fit واسعة ومريحة المقاسات: Size 1 ( Fits 55~", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 75~90 KG )"], "opt2": ["Beige", "Black", "Brown", "Olive", "Pink", "Yellow"]}, {"handle": "comfy-pants", "title": "Comfy Pants", "category": "Pants & Skirts", "price": 700.0, "compare": 950.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/365A6203.jpg?v=1786682703", "desc": "👖Comfy pants مقاس ١: عرض الوسط ٥٠ سم مقاس ٢: عرض الوسط ٥٢ سم الطول : ١٠٥سم الخامة: كريب روزالين مستورد. مقاس البنطلون: مقاس ١ : الوسط ٥٠ سم مقاس ٢ : الوسط ٥٢ سم الطول: ١٠٥", "opt1": ["Size 1 ( Fits 55~70 KG )", "Size 2 ( Fits 75~90 KG )"], "opt2": ["Beige", "Black", "Burgundy", "Olive", "White"]}, {"handle": "amora-flow-dress", "title": "Amora Flow Dress", "category": "Dresses", "price": 390.0, "compare": 550.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_9022972d-c1b9-4ad2-92de-e98da8527f3b.jpg?v=1786035385", "desc": "تصميم أنثوي ناعم يجمع بين الراحة والأناقة، بقصة انسيابية تمنحك إطلالة مميزة في كل مناسبة. مصنوع من كتان تركي بخامة خفيفة ومريحة، مع حبل خلفي يتيح ضبط المقاس ليناسب شكل الجسم ويمنحك تلبيسة مثالية. الخامة من الكتان التركي ", "opt1": ["One size"], "opt2": ["Baby Blue", "Black", "Pink", "Red", "Yellow"]}, {"handle": "midnight-satin-hearts-set", "title": "Midnight Satin Hearts Set", "category": "Sets & Suits", "price": 600.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_619ba186-f099-41d7-89de-056210205d8b.jpg?v=1785552665", "desc": "طقم بيجامه من خامة ستان ناعمة وانسيابية تمنحكِ إحساسًا بالراحة والفخامة طوال اليوم. الطقم مكون من: توب + شورت. 🎀 التوب مزود بحمالات قابلة للتعديل (توسع وتضيق) لراحة وثبات أفضل. وتناسب أكثر من مقاس 🌸 فري سايز يناسب من 50 ", "opt1": ["One size"], "opt2": ["Cashmere"]}, {"handle": "home-cozy-3-piece-set", "title": "Home Cozy 3-Piece Set", "category": "Sets & Suits", "price": 570.0, "compare": 770.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_4242d6b0-055b-4998-99d6-5c013f38b232.jpg?v=1785548551", "desc": "بيجاما مكونه من ثلاث قطع بنطلون شورت توب بطابعة القلوب خامة مضلعة من الريب و ليكرا ناعمة تناسب مع مقاس من 50 الي 85 كيلو جرام", "opt1": ["Red"], "opt2": ["One size"]}, {"handle": "مسدس-فقاعات-كهربائي-مع-إضاءة-led", "title": "مسدس البابلز التريند", "category": "Toys & Gifts", "price": 250.0, "compare": 350.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/518RgXpK5TL._AC.jpg?v=1773023229", "desc": "مسدس فقاعات كهربائي يملأ المكان بالمرح! يأتي مع إضاءة LED ملونة تضيف جو ممتع في الصيف، الحفلات، أعياد الميلاد والأنشطة الخارجية. سهل الاستخدام، آمن للأطفال، ويعمل بالبطاريات – جاهز للمتعة فورًا", "opt1": ["Default Title"], "opt2": []}, {"handle": "مسدس-بابلز-جامبو-69-فتحة-للفقاعات-🎉", "title": "مسدس 69 فتحة الجامبو", "category": "Toys & Gifts", "price": 360.0, "compare": 550.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/71se5QlsFvL._AC_SL1080.jpg?v=1773022268", "desc": "أكبر مسدس بابلز في مصر بـ69 فتحة بيطلع كمية هائلة من الفقاعات تملي المكان كله! بيجي معاه علبتين صابون جاهزين للعب، وأنوار رائعة من الفتحات تناسب الحفلات وأعياد الميلاد وتجميعات الأطفال. الشحن كهرباء مع كابل مرفق – مش محت", "opt1": ["Default Title"], "opt2": []}, {"handle": "الدبدوب-التريند-حضن-ينبض-بالحياة-💖", "title": "دبدوب بيتنفس", "category": "Toys & Gifts", "price": 450.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/Breathing-teddy-2.webp?v=1771295011", "desc": "الدبدوب التريند – حضن ينبض بالحياة 💖 مش بس هتحسيه جنبك.. ده كمان بيتنفس ببطء وصوت النفس هادي، جسمه من خامة قطيفة فلافي ناعمة ومريحة. شغال ببطاريات وآمن تمامًا، وبيتحرك بطنه لأعلى ولأسفل لتهدئتك أو تهدئة طفلك. مثالي كهدية", "opt1": ["Baby Blue", "Beige", "Gray", "Pink"], "opt2": []}, {"handle": "الكاسيت-الترند-علي-شكل-ماديلية", "title": "الكاسيت الترند علي شكل ماديلية", "category": "Toys & Gifts", "price": 195.0, "compare": 300.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/WhatsApp_Image_2026-02-13_at_11.12.12_PM.jpg?v=1771060606", "desc": "الميدالية الكاسيت الترندي 🎧✨ هدية بسيطة بس إحساسها كبير جدًا 💛", "opt1": ["Default Title"], "opt2": []}, {"handle": "set-aura", "title": "Eva Set", "category": "Sets & Suits", "price": 1100.0, "compare": 1550.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_b075df1e-89cb-471a-8771-a6468a1fcc14.jpg?v=1784820168", "desc": "استمتعي بإطلالة عصرية تجمع بين البساطة والأناقة مع Eva Set المصنوع من خامة القطن المريحة. يتميز ببنطلون واسع يمنحك حرية في الحركة ولمسة انسيابية أنيقة، مع بلوزة مزودة بحزام خصر يمكنكِ ربطه وضبطه حسب شكل الجسم لإبراز القو", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Dark Gray"]}, {"handle": "mini-low-backless-flow-dress-1", "title": "( Mini ) Low Backless Flow Dress", "category": "Dresses", "price": 320.0, "compare": 550.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/AN-O43_1.jpg?v=1786148080", "desc": "الخامة من الكتان تركي فاخر، خفيف الوزن، يسمح بمرور الهواء، ومريح للارتداء اليومي. المقاس: فري سايز من ،60 ل 120 كيلو بسبب وجود استك من الضهر يناسب معظم أنواع الجسم بقصة فضفاضة ومريحة. الاوان المتوفرة ابيض - اسود - اصفر -", "opt1": ["One size"], "opt2": ["Black", "Burgundy", "Fuchsia", "Red", "White", "Yellow"]}, {"handle": "low-backless-flow-dress", "title": "Low Backless Flow Dress", "category": "Dresses", "price": 350.0, "compare": 600.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_6f3ab968-0033-462d-9037-0a7189d99393.jpg?v=1784221531", "desc": "الخامة من الكتان تركي فاخر، خفيف الوزن، يسمح بمرور الهواء، ومريح للارتداء اليومي. المقاس: فري سايز من ،60 ل 120 كيلو بسبب وجود استك من الضهر يناسب معظم أنواع الجسم بقصة فضفاضة ومريحة. الاوان المتوفرة ابيض - اسود - اصفر -", "opt1": ["One size"], "opt2": ["Baby Blue", "Black", "Burgundy", "Fuchsia", "Olive", "Pink", "Red", "White", "Yellow"]}, {"handle": "royal-lace-blouse", "title": "Royal Lace Blouse", "category": "Blouses & Shirts", "price": 750.0, "compare": 1100.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_ffdaa244-c8b0-43e3-b9c1-e54a6ce89514.jpg?v=1782437919", "desc": "Royal Lace Blouse 🩵 خامة Royal Lace تركي مستورد تصميم أنثوي راقٍ بتفاصيل دانتيل أنيقة قصة تبرز جمال القوام بأسلوب راقٍ ومريح مناسبة للخروجات الراقية، العزومات والمناسبات الخاصة قطعة مميزة لعاشقات الأناقة الهادئة والذوق ا", "opt1": ["1", "2"], "opt2": ["White"]}, {"handle": "lora-blouse", "title": "Lora Blouse", "category": "Blouses & Shirts", "price": 420.0, "compare": 600.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260607_012409.jpg?v=1784221207", "desc": "بلوزة لورا إضافة أنيقة ومريحة لخزانتك الصيفية. تتميز بلوزة لورا بقصتها الواسعة المريحة وخامة Galaxy المستورد الناعمة التي تمنحك إحساسًا بالراحة طوال اليوم، مع تصميم عملي يناسب مختلف الإطلالات. المميزات: خامة Galaxy مستور", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Pink", "White", "Yellow"]}, {"handle": "soft-wrap-blouse", "title": "Soft Wrap Blouse", "category": "Blouses & Shirts", "price": 390.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260607_025541.jpg?v=1780792807", "desc": "Soft Wrap Blouse بلوزة أنيقة بتصميم Wrap عصري يضيف لمسة أنثوية راقية لإطلالتك اليومية. مصنوعة من خامة CY المستورد الناعمة والخفيفة، لتمنحك الراحة والانتعاش طوال اليوم خاصة في الأجواء الحارة. المميزات: خامة CY مستورد ناعم", "opt1": ["One size"], "opt2": ["Black", "Burgundy", "Green", "White"]}, {"handle": "turkish-linen-shirt", "title": "Turkish linen shirt", "category": "Blouses & Shirts", "price": 350.0, "compare": 500.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260413_030323_jpg.jpg?v=1776045060", "desc": "شميز \"سيلينا\" كتان تركي فاخر - رقة وبساطة في قطعة واحدة ✨ أضيفي لمسة من الفخامة التركية لخزانتك مع هذا الشميز المصمم خصيصاً للمرأة التي تبحث عن الراحة دون التنازل عن الأناقة. يتميز بقصة انسيابية عصرية مع تفصيلة الزرار ال", "opt1": ["One size"], "opt2": ["Burgundy", "Olive", "Orange", "Pink", "Yellow"]}, {"handle": "oversized-t-shirt-summer-milton", "title": "Oversized T-shirt with belt", "category": "T-Shirts", "price": 390.0, "compare": 500.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260420_034523_jpg.jpg?v=1776652365", "desc": "تيشيرت بخامة قطن عالية الجودة، مريح وعملي للاستخدام اليومي. مزود برباط من عند الوسط للتحكم في المقاس وتحديد الشكل حسب الرغبة. يتميز بقصة Oversize تناسب مختلف الأجسام وتوفر راحة وأناقة في نفس الوقت المقاس فري سايز ل 85 كي", "opt1": ["One size"], "opt2": ["Baby Blue", "Beige", "Black", "Brown", "Burgundy", "Fuchsia", "Pink", "Red", "White", "Yellow"]}, {"handle": "t-shirt-summer-milton", "title": "T-shirt Summer milton", "category": "T-Shirts", "price": 350.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260416_052510_jpg_24555dc4-48cb-432b-8d69-6b8f5dd725d0.jpg?v=1776312657", "desc": "تيشرت \"بيزك\" أوفر سايز – الراحة والشياكة في قطعة واحدة ✨ خامة سمر ميلتون فاخرة: خامة قطنية خفيفة، ناعمة جداً على الجسم، وتسمح بالتهوية، مما يجعلها مثالية لفصول السنة المختلفة وللخروجات السريعة أو النادي. قصة أوفر سايز (O", "opt1": ["One size"], "opt2": ["Black", "Burgundy", "Olive", "Pink", "Yellow"]}, {"handle": "elegance-french-skirt", "title": "Elegance French skirt", "category": "Pants & Skirts", "price": 550.0, "compare": 650.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260416_055454_jpg.jpg?v=1776311900", "desc": "لأن راحتك وأناقتك أولويتنا، نقدم لكِ هذه الجيبة المصنوعة من أفخر أنواع الكتان الفرنسي. تصميم يجمع بين الحشمة العصرية والجمال الكلاسيكي، مع لمسة إضافية تضمن لكِ الثقة الكاملة. كتان فرنسي فاخر: نسيج طبيعي يسمح للبشرة بالتن", "opt1": ["One size"], "opt2": ["Off white"]}, {"handle": "elegance-skirt-with-t-shirt", "title": "Elegance Skirt with T-shirt", "category": "Sets & Suits", "price": 850.0, "compare": 950.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260416_051844_jpg.jpg?v=1776311064", "desc": "✨إطلالة صيفية متكاملة تجمع بين الأناقة والراحة ✨ طقم مصمم ليمنحك ستايل راقي وخفيف يناسب أيام الصيف والخروجات، بخامات مريحة وتصميم أنثوي يبرز جمال الإطلالة بسهولة. جيبة Linen Maxi جيبة طويلة واسعة بتصميم انسيابي أنيق، مصن", "opt1": ["One size"], "opt2": ["Black", "Burgundy", "Olive", "Pink", "Yellow"]}, {"handle": "french-linen-blouse", "title": "French linen blouse", "category": "Blouses & Shirts", "price": 350.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260413_031743_jpg.jpg?v=1776043409", "desc": "بلوزة \"سمر بريز\" كتان فرنساوي - عنوان الأناقة والراحة ✨ استعدي للصيف بإطلالة تجمع بين الحشمة والعصرية مع بلوزتنا الطويلة المصنوعة من أجود أنواع الكتان الفرنساوي المستورد . قطعة أساسية في دولابك، صُممت لتمنحك شعوراً بالخف", "opt1": ["One size"], "opt2": ["Burgundy", "Olive", "Orange", "Pink", "Yellow"]}, {"handle": "suit-summer-milton-cotton", "title": "suit summer milton cotton", "category": "Sets & Suits", "price": 550.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/Cozysuitsummermiltoncotton100_4.jpg?v=1774837301", "desc": "الخامة: سامر ميلتون (Summer Milton) ممتاز، خامة خفيفة، ناعمة جداً على البشرة، وفي نفس الوقت عملية ومش بتحرر، مثالية للصيف وللأجواء المعتدلة. المقاس: فري سايز (Free Size) بتلبيس مرن ومريح جداً، مصمم عشان يناسب الأوزان من ", "opt1": ["One size"], "opt2": ["Black", "Brown", "Burgundy", "Green", "mauve"]}, {"handle": "عباية-مقفولة-ب-اسكارف", "title": "عباية مقفولة ب اسكارف", "category": "Abayas", "price": 600.0, "compare": 1000.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/WhatsAppImage2026-02-21at4.05.41AM.jpg?v=1771640636", "desc": "العباية مقفولة مع السكارف - أناقة سوداء ولمعة ناعمة ✨العباية السوداء من خامة كريب تركي ثقيل بتجمع بين الشياكة والراحة، ومعاها سكارف متخيط في العباية بألوان راقية زي الزيتي والوردي الكم مبطن بنفس لون السكارف ليوفر لمسة أن", "opt1": ["One size"], "opt2": ["Olive", "Pink"]}, {"handle": "كارديجان-الفراشة-مع-البيزك", "title": "كارديجان الفراشة مع البيزك", "category": "Jackets & Cardigans", "price": 950.0, "compare": 1100.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_49dfa2d6-5f2d-426d-902e-54f054715c8e.jpg?v=1772041569", "desc": "أضيفي لمسة سحرية إلى خزانتكِ مع قطعة تنساب برشاقة الفراشة. مصنوع من قماش شيمر فاخر مستورد، معروف بلمعانه الخفيف وملمسه الناعم الذي يعكس الضوء بشكل رائع. يتميز بتصميم عصري أنيق، بقصة فراشة تمنحكِ إطلالة أنيقة بكل سهولة، ب", "opt1": ["One size"], "opt2": ["Burgundy", "Olive", "Pink"]}, {"handle": "عباية-أوبن-بحزام-كورسيه-ميتالك", "title": "عباية أوبن بحزام كورسيه ميتالك", "category": "Abayas", "price": 750.0, "compare": 1000.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/rn-image_picker_lib_temp_52367479-c6db-48fd-8a8b-cc74ca9ca047.jpg?v=1771525908", "desc": "أناقة هادية تليق بذوقك عباية أوبن بحزام عريض يديكي شكل مرتب وراقي من غير أي مجهود مريحة + شيك + عملية لكل المناسبات اختيار مثالي لرمضان والعيد مناسبة خروجات، عزومات، صور حلوة على طول Product Details Product Details Featu", "opt1": ["One size"], "opt2": ["Beige", "White"]}, {"handle": "ramadan-cardigan", "title": "Ramadan cardigan", "category": "Jackets & Cardigans", "price": 450.0, "compare": 650.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260218_19174995.jpg?v=1771439076", "desc": "كاريجان بتصميم انسيابي وأكمام بتفاصيل رقيقة (Ruffles) تدي لمسة أنوثة لأي طقم Basic عندك. فري سايز وبيلبس مرتاح جداً من 55 لـ 95 كيلو. خامة كتان فرنساوي متاح بالألوان (نبيتي - موف - بيج) وعشان احنا المصنع وفرناه باعلي جود", "opt1": ["One size"], "opt2": ["Beige", "Burgundy", "Lavender"]}, {"handle": "isdal-jacquard-white-1", "title": "Isdal Jacquard Burgandy with bag", "category": "Sets & Suits", "price": 650.0, "compare": 900.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260217_045541_jpg.jpg?v=1771304447", "desc": "اختاري إطلالة تجمع بين الفخامة والاحتشام مع إسدال ستان جاكار المصمم ليمنحك راحة وأناقة في كل وقت. يتميز بقماش ستان جاكار الفاخر بنقشته المنسوجة داخل القماش، ما يضفي مظهرًا راقيًا بلمسة مميزة بدون مبالغة خامة الاسدال:ستان", "opt1": ["One size"], "opt2": ["Burgundy"]}, {"handle": "isdal-jacquard-black", "title": "Isdal Jacquard Black with bag", "category": "Sets & Suits", "price": 650.0, "compare": 900.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260217_050319.jpg_1.jpg?v=1771303594", "desc": "اختاري إطلالة تجمع بين الفخامة والاحتشام مع إسدال ستان جاكار المصمم ليمنحك راحة وأناقة في كل وقت. يتميز بقماش ستان جاكار الفاخر بنقشته المنسوجة داخل القماش، ما يضفي مظهرًا راقيًا بلمسة مميزة بدون مبالغة خامة الاسدال:ستان", "opt1": ["One size"], "opt2": ["Black"]}, {"handle": "isdal-jacquard-white", "title": "Isdal Jacquard White with bag", "category": "Sets & Suits", "price": 650.0, "compare": 900.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260217_045903_jpg_3defc0f2-3a98-4430-9f74-e847db97ad04.jpg?v=1771303198", "desc": "اختاري إطلالة تجمع بين الفخامة والاحتشام مع إسدال ستان جاكار المصمم ليمنحك راحة وأناقة في كل وقت. يتميز بقماش ستان جاكار الفاخر بنقشته المنسوجة داخل القماش، ما يضفي مظهرًا راقيًا بلمسة مميزة بدون مبالغة خامة الاسدال:ستان", "opt1": ["One size"], "opt2": ["White"]}, {"handle": "isdal-jacquard", "title": "Isdal Jacquard Beige with bag", "category": "Sets & Suits", "price": 650.0, "compare": 900.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/IMG_20260217_060847_jpg.jpg?v=1771302015", "desc": "اختاري إطلالة تجمع بين الفخامة والاحتشام مع إسدال ستان جاكار المصمم ليمنحك راحة وأناقة في كل وقت. يتميز بقماش ستان جاكار الفاخر بنقشته المنسوجة داخل القماش، ما يضفي مظهرًا راقيًا بلمسة مميزة بدون مبالغة خامة الاسدال:ستان", "opt1": ["One size"], "opt2": ["Beige"]}, {"handle": "قفطان-ذهبي-مطرّز-فخامة-وراحة-في-تصميم-واحد", "title": "قفطان ذهبي مطرّز – فخامة وراحة في تصميم واحد", "category": "Kaftans", "price": 2899.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/BB4836BF-E21E-46AE-ACF3-A3BF0737A695_800x_e7357121-e2f7-4ac6-b586-92508080008b.webp?v=1769979763", "desc": "قفطان بتصميم واسع وفضفاض مع تطريز ذهبي فاخر يضفي لمسة ملكية على إطلالتك. مثالي للمناسبات الرسمية والسهرات لإطلالة أنثوية أنيقة ومريحة في نفس الوقت.", "opt1": ["One size"], "opt2": []}, {"handle": "العباية-الأوبن-مع-السكارف-أناقة-سوداء-بتفاصيل-ميتاليك-✨", "title": "العباية الأوبن مع السكارف و ال بيزك", "category": "Abayas", "price": 750.0, "compare": 1300.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/WhatsApp_Image_2026-02-10_at_4.54.28_AM.jpg?v=1773134260", "desc": "العباية الأوبن مع السكارف - أناقة سوداء ولمعة ناعمة ✨العباية الأوبن السوداء من خامة كريب تركي ثقيل بتجمع بين الشياكة والراحة، ومعاها سكارف متخيط في العباية بألوان راقية زي الزيتي واللافاندر والنبيتي. الكم مبطن بنفس لون ا", "opt1": ["One size"], "opt2": ["Burgundy", "Lavender", "Olive", "Red"]}, {"handle": "جاكيت-بيج-فاتح-مطرّز-لمسة-أنيقة-وعصرية-لكل-يوم", "title": "جاكيت بيج فاتح مطرّز – لمسة أنيقة وعصرية لكل يوم", "category": "Jackets & Cardigans", "price": 1800.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/5AD4DEEC-8D39-49B3-8C36-D9E8C304DF75_800x_8fabb608-4e6f-47e7-9186-3ab68d963988.webp?v=1769980667", "desc": "جاكيت بيج فاتح بتطريز دقيق يعطي لمسة فاخرة وأناقة بسيطة. مناسب للمشاوير والخروجات الرسمية وغير الرسمية، مصنوع ليمنحك راحة كاملة مع إطلالة مميزة.", "opt1": ["L", "M", "S", "XL"], "opt2": []}, {"handle": "قفطان-مخملي-وشيفون-أخضر-داكن-أناقة-وفخامة-بتفاصيل-ذهبية", "title": "قفطان مخملي وشيفون أخضر داكن – أناقة وفخامة بتفاصيل ذهبية", "category": "Kaftans", "price": 3000.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/447F0178-BB88-4001-8D45-F0E0170E04D7_800x_94347cc5-71ea-4324-8db7-d87f1e271902.webp?v=1769979213", "desc": "قفطان مخملي وشيفون أخضر داكن – أناقة وفخامة بتفاصيل ذهبية", "opt1": ["One size"], "opt2": []}, {"handle": "قفطان-مغربي-مخملي-مطرّز-فخامة-وأناقة-بلمسة-ملكية", "title": "قفطان مغربي مخملي مطرّز – فخامة وأناقة بلمسة ملكية", "category": "Kaftans", "price": 2700.0, "compare": 3290.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/66EDE092-83F8-4E9B-8A77-10ED7086068D_800x_a5517c74-4c25-4908-a953-8ed1e6c11892.webp?v=1769978337", "desc": "قفطان مخملي باللون البوردو، بتصميم مغربي أصيل مع قبعة خفيفة وحزام مطرّز حول الخصر يمنح الجسم شكل متناسق وأنيق. مثالي للسهرات والمناسبات الخاصة، يجمع بين الفخامة والراحة في قطعة واحدة.", "opt1": ["L", "M"], "opt2": []}, {"handle": "عباية-أورجانزا-وقطيفة-مطرّزة-أناقة-وفخامة-في-قطعة-واحدة", "title": "عباية أورجانزا وقطيفة مطرّزة – أناقة وفخامة في قطعة واحدة", "category": "Abayas", "price": 2870.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/27559F93-8C38-4DC8-8B0A-0CE19C2750E4_800x_1.webp?v=1769977754", "desc": "عباية سوداء تجمع بين نعومة القطيفة ورقة الأورجانزا، مع شريط ذهبي يضفي لمسة ملكية على التصميم. مثالية للمناسبات الرسمية والسهرات، تمنحك إطلالة أنيقة وفاخرة مع راحة كاملة أثناء الارتداء.", "opt1": ["Black"], "opt2": ["Female"]}, {"handle": "جمبسوت-أسود-مطرّز-راحة-وفخامة-في-قطعة-واحدة", "title": "جمبسوت أسود مطرّز – راحة وفخامة في قطعة واحدة", "category": "Dresses", "price": 2999.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/048C2F9E-AD6A-4E60-B1A0-4E58A22347F8_800x_873deeff-ea8c-48cd-aacc-f74b0cfd1818.webp?v=1769977043", "desc": "جمبسوت أسود بتصميم مبتكر بقصة واسعة عند الفخذين، و اناقة عالية وأساور مطرّزة بالذهب لإطلالة أنيقة ومميزة. خامته الخفيفة والفضفاضة تجعله مثالي لمناسبات رمضان والخروجات الرسمية، مع حرية حركة وراحة طوال اليوم.", "opt1": ["Default Title"], "opt2": []}, {"handle": "قفطان-كاب-مطرّز-برقبة-عالية-من-خليط-الكتان-تصميم-فاخر-بحزام-مطرّز-لإطلالة-راقية", "title": "قفطان كاب مطرّز برقبة عالية من خليط الكتان – تصميم فاخر بحزام مطرّز لإطلالة راقية", "category": "Kaftans", "price": 3280.0, "compare": null, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/31B8EC71-4B20-4059-AA32-A9BAAF7C11F8_800x_f5f50493-331f-4a29-854f-db6d14211121.webp?v=1769976671", "desc": "قفطان كاب أنيق يجمع بين الفخامة والبساطة في تصميم واحد مميز. يأتي برقبة عالية مطرّزة بعناية تضيف لمسة راقية للتصميم، مع فستان داخلي بأكمام طويلة مصنوع من قماش خفيف وناعم يضمن راحة كاملة. يكتمل التصميم بحزام مطرّز من نفس ", "opt1": ["2XL", "L", "Medium", "S"], "opt2": []}, {"handle": "قفطان-لف-أخضر-داكن-حضور-فاخر-يخطف-الأنظار", "title": "قفطان لف أخضر داكن – حضور فاخر يخطف الأنظار", "category": "Kaftans", "price": 3499.0, "compare": 3900.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/90B0131B-B7DB-4C65-ABA5-D142A10902AD_800x_710b93a6-d05b-42e1-961e-ad912d62b058.webp?v=1769976206", "desc": "قفطان لف بتصميم جريء ولون أخضر داكن غني يمنحك إطلالة قوية ومليانة ثقة. اختيار مثالي للمناسبات الخاصة والظهور المميز.", "opt1": ["2XL", "2XS", "3XL", "L", "S", "XS"], "opt2": []}, {"handle": "عباية-فورمال-بلمسة-جلد-فخامة-هادئة-بذوق-راقٍ", "title": "عباية فورمال بلمسة جلد – فخامة هادئة بذوق راقٍ", "category": "Abayas", "price": 2700.0, "compare": 3100.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/1G5A8372-new.webp?v=1769975567", "desc": "عباية أنيقة تجمع بين الرقي والبساطة، مع لمسة جلد ناعمة تضيف فخامة بدون مبالغة. مثالية للمناسبات الرسمية بإطلالة راقية ومريحة.", "opt1": ["2XL", "3XL", "4XL", "L", "S", "XS"], "opt2": []}, {"handle": "عباية-كريتيف-بليسيه-بسوستة-أمامية-تصميم-عصري", "title": "عباية كريتيف بليسيه بسوستة أمامية – تصميم عصري", "category": "Abayas", "price": 1560.0, "compare": 2000.0, "image": "https://cdn.shopify.com/s/files/1/0987/8346/1508/files/AB8BB35F-7843-4B54-87A1-8357F39FF634_1.webp?v=1769974615", "desc": "عباية أنيقة بقصّة بليسيه تضيف حركة وجمال، مع سوستة أمامية لسهولة اللبس ولمسة مودرن. خامة مريحة وانسيابية تناسب الاستخدام اليومي والخروجات بإطلالة بسيطة ومميزة.", "opt1": ["M"], "opt2": ["Black"]}];
+const CATS = ["All", "Abayas", "Kaftans", "Dresses", "Blouses & Shirts", "Hoodies & Sweatshirts", "Pants & Skirts", "T-Shirts", "Sets & Suits", "Jackets & Cardigans", "Toys & Gifts", "Home & Winter"];
+const fmt = n => 'EGP ' + Number(n).toLocaleString('en-US');
+let curCat = 'All', curSort = 'feat', curQ = '', cart = {}, cur = null, qty = 1;
+
+const grid = document.getElementById('grid');
+const filtersEl = document.getElementById('filters');
+CATS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (c === 'All' ? ' on' : '');
+  b.textContent = c === 'All' ? 'All products' : c;
+  b.onclick = () => setCat(c);
+  filtersEl.appendChild(b);
+});
+document.querySelectorAll('.nav nav a[data-cat]').forEach(a => {
+  a.onclick = e => { e.preventDefault(); setCat(a.dataset.cat); };
+});
+function setCat(c) {
+  curCat = c;
+  document.querySelectorAll('.chip').forEach(ch => ch.classList.toggle('on', ch.textContent === (c === 'All' ? 'All products' : c)));
+  document.getElementById('activeCat').textContent = c === 'All' ? '' : '· ' + c;
+  render();
+  scrollToGrid();
+}
+function scrollToGrid(){ document.getElementById('shop').scrollIntoView({behavior:'smooth'}); }
+document.getElementById('q').addEventListener('input', e => { curQ = e.target.value.trim().toLowerCase(); render(); });
+document.getElementById('sort').addEventListener('change', e => { curSort = e.target.value; render(); });
+
+function discount(p){ return p.compare && p.compare > p.price ? Math.round((1 - p.price / p.compare) * 100) : 0; }
+function render(){
+  let list = PRODUCTS.filter(p => (curCat === 'All' || p.category === curCat) &&
+    (!curQ || (p.title + ' ' + p.category).toLowerCase().includes(curQ)));
+  if (curSort === 'low') list.sort((a,b) => a.price - b.price);
+  if (curSort === 'high') list.sort((a,b) => b.price - a.price);
+  if (curSort === 'sale') list.sort((a,b) => discount(b) - discount(a));
+  document.getElementById('count').textContent = list.length + ' products';
+  document.getElementById('empty').style.display = list.length ? 'none' : 'block';
+  grid.innerHTML = list.map(p => {
+    const d = discount(p);
+    const opts = [...(p.opt1||[]), ...(p.opt2||[])].slice(0,4).join(' · ');
+    return `<article class="card">
+      <div class="img" onclick="openModal('${p.handle}')">
+        <img src="${p.image}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.style.opacity=.25">
+        ${d ? `<span class="badge">−${d}% SALE</span>` : ''}
+      </div>
+      <div class="body">
+        <div class="cat">${p.category}</div>
+        <div class="title">${p.title}</div>
+        <div class="price">${fmt(p.price)}${p.compare ? `<s>${fmt(p.compare)}</s><span class="save">Save ${fmt(p.compare - p.price)}</span>` : ''}</div>
+        ${opts ? `<div class="opts">${opts}</div>` : ''}
+        <button class="add" onclick="addToCart('${p.handle}',1)">Add to cart</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+function byHandle(h){ return PRODUCTS.find(p => p.handle === h); }
+function openModal(h){
+  cur = byHandle(h); qty = 1;
+  document.getElementById('qty').textContent = '1';
+  document.getElementById('mImg').src = cur.image;
+  document.getElementById('mCat').textContent = cur.category;
+  document.getElementById('mTitle').textContent = cur.title;
+  const d = discount(cur);
+  document.getElementById('mPrice').innerHTML = fmt(cur.price) + (cur.compare ? ` <s>${fmt(cur.compare)}</s> <span class="save">−${d}%</span>` : '');
+  document.getElementById('mDesc').textContent = cur.desc || 'From the Funfinity collection.';
+  let o = '';
+  if (cur.opt1 && cur.opt1.length) o += `<div style="font-size:13px;font-weight:600;margin-bottom:4px">Size</div><div class="pillrow">${cur.opt1.map((v,i)=>`<button class="pill${i===0?' on':''}" onclick="pick(this)">${v}</button>`).join('')}</div>`;
+  if (cur.opt2 && cur.opt2.length) o += `<div style="font-size:13px;font-weight:600;margin-bottom:4px">Colour</div><div class="pillrow">${cur.opt2.map((v,i)=>`<button class="pill${i===0?' on':''}" onclick="pick(this)">${v}</button>`).join('')}</div>`;
+  document.getElementById('mOpts').innerHTML = o;
+  document.getElementById('mAdd').onclick = () => { addToCart(cur.handle, qty); closeModal(); toggleCart(true); };
+  document.getElementById('modal').classList.add('open');
+}
+function pick(el){ el.parentElement.querySelectorAll('.pill').forEach(x => x.classList.remove('on')); el.classList.add('on'); }
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+function chQty(d){ qty = Math.max(1, qty + d); document.getElementById('qty').textContent = qty; }
+document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+function addToCart(h, n){
+  cart[h] = (cart[h] || 0) + n;
+  renderCart();
+}
+function renderCart(){
+  const ids = Object.keys(cart);
+  const count = ids.reduce((s,h) => s + cart[h], 0);
+  document.getElementById('cartCount').textContent = count;
+  const box = document.getElementById('cartItems');
+  if (!ids.length){ box.innerHTML = '<p style="color:var(--mut);font-size:14px">Your cart is empty.</p>'; document.getElementById('cartTotal').textContent = 'EGP 0'; return; }
+  let total = 0;
+  box.innerHTML = ids.map(h => {
+    const p = byHandle(h); const n = cart[h]; total += p.price * n;
+    return `<div class="ci"><img src="${p.image}" alt=""><div><div class="t">${p.title}</div><div class="p">${fmt(p.price)} × ${n}</div></div><button class="rm" onclick="rmCart('${h}')">Remove</button></div>`;
+  }).join('');
+  document.getElementById('cartTotal').textContent = fmt(total);
+}
+function rmCart(h){ delete cart[h]; renderCart(); }
+function toggleCart(open){
+  document.getElementById('drawer').classList.toggle('open', open);
+  if (open) renderCart();
+}
+document.getElementById('cartBtn').onclick = () => toggleCart(true);
+// hero featured product = Velvet Abaya
+const hero = byHandle('velvet-abaya') || PRODUCTS[0];
+document.getElementById('heroImg').src = hero.image;
+document.getElementById('heroTag').textContent = hero.title + ' — ' + fmt(hero.price);
+render(); renderCart();
+</script>
+</body>
+</html>
