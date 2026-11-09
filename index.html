@@ -22,16 +22,6 @@ h1,h2,h3,.disp{font-family:Archivo,sans-serif}
 .rv-l.in{opacity:1;transform:none}
 .rv-r{opacity:0;transform:translateX(28px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
 .rv-r.in{opacity:1;transform:none}
-/* hero entrance */
-@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-@keyframes imgIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
-.hero .txt>*{animation:rise .8s cubic-bezier(.22,.61,.36,1) both}
-.hero .txt>*:nth-child(1){animation-delay:.05s}
-.hero .txt>*:nth-child(2){animation-delay:.15s}
-.hero .txt>*:nth-child(3){animation-delay:.28s}
-.hero .txt>*:nth-child(4){animation-delay:.4s}
-.hero .txt>*:nth-child(5){animation-delay:.52s}
-.hero .photo img{animation:imgIn 1.1s cubic-bezier(.22,.61,.36,1) both}
 /* marquee */
 .marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:9px 0;font-family:Archivo;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase}
 .marquee .track{display:inline-flex;animation:mq 26s linear infinite}
@@ -44,36 +34,55 @@ header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid 
 .nav nav{display:flex;gap:24px;font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .nav nav a{padding:6px 0;position:relative}
 .nav nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--acc);transition:width .2s}
-.nav nav a:hover::after{width:100%}
+.nav nav a:hover::after,.nav nav a.hot::after{width:100%}
 .search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--soft);border-radius:999px;padding:9px 15px;min-width:230px;transition:box-shadow .2s}
 .search:focus-within{box-shadow:0 0 0 2px var(--ink)}
 .search input{border:0;outline:0;font-size:14px;width:100%;background:transparent}
 .cartbtn{position:relative;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;transition:transform .15s,background .2s}
 .cartbtn:hover{background:var(--acc);transform:translateY(-1px)}
 .cartbtn b{position:absolute;top:-7px;right:-7px;background:var(--acc);color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-/* hero — split editorial, FULL-BLEED: text aligns to the 1360px container, photo runs to the viewport edge */
-.hero{background:var(--ink);color:#fff;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch}
-.hero .txt{padding:76px 48px 76px max(24px,calc((100vw - 1360px)/2 + 24px));display:flex;flex-direction:column;justify-content:center}
-.kicker{font-family:Archivo;font-weight:700;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:#ffd9d2}
-.hero h1{font-size:clamp(48px,6.4vw,88px);line-height:.94;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;margin:14px 0 18px}
-.hero h1 .serif{font-size:.82em;letter-spacing:0;text-transform:none;color:#ffb3a6}
-.hero p{font-size:17px;line-height:1.6;max-width:520px;color:#d8d2c8}
-.hero .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 .btn{display:inline-block;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:15px 30px;font-size:15px;font-weight:700;transition:transform .15s,background .2s,color .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.dark{background:var(--ink);color:#fff}
 .btn.acc{background:var(--acc);color:#fff}
 .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)}
-.hero .meta{display:flex;gap:36px;margin-top:34px;flex-wrap:wrap}
-.hero .meta b{font-family:Archivo;font-size:28px;display:block}
-.hero .meta span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#d8d2c8}
-.hero .photo{position:relative;min-height:560px;overflow:hidden}
-.hero .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
-.hero .photo .tag{position:absolute;left:18px;bottom:18px;background:#fff;color:var(--ink);border-radius:999px;padding:10px 16px;font-size:13.5px;font-weight:700;z-index:2}
-.scrollhint{margin-top:26px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9d968c;display:flex;align-items:center;gap:10px}
-.scrollhint::after{content:"";width:44px;height:1px;background:#9d968c;animation:hint 1.6s ease-in-out infinite}
-@keyframes hint{0%,100%{transform:scaleX(.4);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}}
+/* mega menu — products inside the nav dropdown */
+.megamenu{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 24px 44px rgba(17,17,16,.14);display:none;z-index:60}
+.megamenu.open{display:block}
+.megamenu .in{max-width:1360px;margin:0 auto;padding:26px 24px 30px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mm-card{cursor:pointer}
+.mm-card .img{border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#ece7de}
+.mm-card .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.mm-card:hover .img img{transform:scale(1.06)}
+.mm-card .t{font-size:14px;font-weight:600;margin-top:10px;line-height:1.35}
+.mm-card .p{font-size:14px;font-weight:800;margin-top:4px}
+.mm-card .p s{color:var(--mut);font-weight:500;font-size:12px;margin-left:5px}
+.megamenu .foot{max-width:1360px;margin:0 auto;padding:0 24px 22px;display:flex;justify-content:space-between;align-items:center}
+.megamenu .foot b{font-family:Archivo;font-size:15px;text-transform:uppercase}
+.megamenu .foot a{font-size:14px;font-weight:700;color:var(--acc)}
+/* top strip — compact, product-led (replaces the big hero) */
+.topstrip{background:var(--ink);color:#fff}
+.topstrip .wrap{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:36px;padding:34px 24px;align-items:center}
+.topstrip .kicker{color:#ffd9d2}
+.topstrip h1{font-size:clamp(30px,3.4vw,44px);line-height:1;font-weight:900;letter-spacing:-.02em;text-transform:uppercase;margin:10px 0 12px}
+.topstrip h1 .serif{font-size:.85em;letter-spacing:0;text-transform:none;color:#ffb3a6}
+.topstrip p{font-size:14.5px;line-height:1.6;color:#d8d2c8}
+.topstrip .cta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.topstrip .meta{display:flex;gap:26px;margin-top:20px}
+.topstrip .meta b{font-family:Archivo;font-size:22px;display:block}
+.topstrip .meta span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#d8d2c8}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.feat .fcard{background:#1d1c1a;border:1px solid #33302c;border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s}
+.feat .fcard:hover{transform:translateY(-4px);border-color:#55504a}
+.feat .fcard .img{aspect-ratio:1/1;overflow:hidden}
+.feat .fcard .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.feat .fcard:hover .img img{transform:scale(1.07)}
+.feat .fcard .body{padding:12px 13px 14px}
+.feat .fcard .t{font-size:13.5px;font-weight:600;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feat .fcard .p{font-size:14px;font-weight:800;margin-top:5px}
+.feat .fcard .p s{color:#9d968c;font-weight:500;font-size:12px;margin-left:5px}
+.feat .fcard .add{margin-top:10px;width:100%;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:9px;font-size:13px;font-weight:700;transition:background .2s}
+.feat .fcard .add:hover{background:var(--acc);color:#fff}
 /* section furniture */
 .section{max-width:1360px;margin:0 auto;padding:64px 24px 8px}
 .sec-label{font-family:Archivo;font-weight:700;font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;gap:12px}
@@ -201,7 +210,7 @@ footer .big{font-family:Archivo;font-weight:900;font-size:clamp(40px,6vw,72px);c
 footer .big i{color:var(--acc);font-style:normal}
 footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;font-size:12.5px;color:#8d857a}
 .proto{max-width:1360px;margin:0 auto;padding:12px 24px 0;font-size:12.5px;color:var(--mut)}
-@media(max-width:900px){.cols{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}.tile.big{grid-column:span 2}.grid{grid-template-columns:repeat(2,1fr)}.sheet{grid-template-columns:1fr}.lb{grid-template-columns:1fr}.lb .ph{min-height:340px}.benefits{grid-template-columns:repeat(2,1fr)}.ben{padding-left:0;border-left:0}.nav nav{display:none}.search{min-width:0;flex:1}.hero .wrap{grid-template-columns:1fr}.hero .txt{padding:48px 24px 32px}.hero .photo{min-height:420px}footer .in{grid-template-columns:1fr 1fr}.arrow{display:none}}
+@media(max-width:900px){.cols{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}.tile.big{grid-column:span 2}.grid{grid-template-columns:repeat(2,1fr)}.sheet{grid-template-columns:1fr}.lb{grid-template-columns:1fr}.lb .ph{min-height:340px}.benefits{grid-template-columns:repeat(2,1fr)}.ben{padding-left:0;border-left:0}.nav nav{display:none}.search{min-width:0;flex:1}.topstrip .wrap{grid-template-columns:1fr}.feat{grid-template-columns:repeat(2,1fr)}.megamenu{display:none!important}footer .in{grid-template-columns:1fr 1fr}.arrow{display:none}}
 </style>
 </head>
 <body>
@@ -217,33 +226,30 @@ footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;fo
   </nav>
   <label class="search"><span>🔍</span><input id="q" type="text" placeholder="Search the drop…"></label>
   <button class="cartbtn" id="cartBtn">🛍 Cart <b id="cartCount">0</b></button>
-</div></header>
+</div>
+<div class="megamenu" id="megamenu"><div class="in" id="mmGrid"></div><div class="foot"><b id="mmTitle"></b><a href="#" id="mmAll">View all →</a></div></div>
+</header>
 
-<section class="hero">
+<section class="topstrip">
   <div class="wrap">
-    <div class="txt">
+    <div>
       <div class="kicker">FW26 — Winter Collection · Cairo</div>
       <h1>Wear the<br><span class="serif">new season.</span></h1>
-      <p>Abayas, kaftans, dresses and cosy sets — 60 real styles from the Funfinity catalogue, now in a store built to move fast and look sharp.</p>
+      <p>60 real styles, 44 on sale — abayas, kaftans, dresses and cosy sets. No big banner, just the drop.</p>
       <div class="cta">
         <button class="btn" onclick="scrollToGrid()">Shop new in ↓</button>
-        <button class="btn ghost" onclick="setCat('Kaftans')">Kaftans</button>
       </div>
       <div class="meta">
         <div><b>60</b><span>Products</span></div>
         <div><b>283</b><span>Variants</span></div>
         <div><b>44</b><span>On sale</span></div>
       </div>
-      <div class="scrollhint">Scroll</div>
     </div>
-    <div class="photo">
-      <img src="https://cdn.shopify.com/s/files/1/0987/8346/1508/files/BB4836BF-E21E-46AE-ACF3-A3BF0737A695_800x_e7357121-e2f7-4ac6-b586-92508080008b.webp?v=1769979763" alt="قفطان ذهبي مطرّز – فخامة وراحة في تصميم واحد">
-      <span class="tag">✦ Golden Embroidered Kaftan — the season's icon</span>
-    </div>
+    <div class="feat" id="feat"></div>
   </div>
 </section>
 
-<div class="proto">PROTOTYPE v3 — editorial redesign with motion. Real Funfinity catalogue (funfinity-fashion.com). Prices in EGP.</div>
+<div class="proto">PROTOTYPE v4 — no big hero, products up top + mega menu. Real Funfinity catalogue (funfinity-fashion.com). Prices in EGP.</div>
 
 <section class="section">
   <div class="sec-label rv">01 — Collections</div>
@@ -346,7 +352,7 @@ footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;fo
     <div><h4>Follow</h4><ul><li>Instagram</li><li>Facebook</li><li>TikTok</li></ul></div>
   </div>
   <div class="big">FUNFINITY<i>.</i></div>
-  <div class="fine">© 2026 Funfinity — theme prototype v3. Prices in EGP. · FW26 · Cairo</div>
+  <div class="fine">© 2026 Funfinity — theme prototype v4. Prices in EGP. · FW26 · Cairo</div>
 </footer>
 
 <script>
@@ -371,6 +377,56 @@ CATS.forEach(c => {
 document.querySelectorAll('.nav nav a[data-cat]').forEach(a => {
   a.onclick = e => { e.preventDefault(); setCat(a.dataset.cat); };
 });
+/* mega menu — hover a nav item, see its products */
+const mm = document.getElementById('megamenu');
+const mmGrid = document.getElementById('mmGrid');
+const mmTitle = document.getElementById('mmTitle');
+const mmAll = document.getElementById('mmAll');
+let mmTimer = null;
+function mmShow(cat){
+  clearTimeout(mmTimer);
+  const list = cat === 'All' ? [...PRODUCTS].sort((a,b) => discount(b) - discount(a)).slice(0,4)
+    : PRODUCTS.filter(p => p.category === cat).slice(0,4);
+  mmTitle.textContent = cat === 'All' ? 'Featured — biggest discounts' : cat;
+  mmGrid.innerHTML = list.map(p => {
+    const d = discount(p);
+    return `<div class="mm-card" onclick="openModal('${p.handle}')">
+      <div class="img"><img src="${p.image}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.style.opacity=.25"></div>
+      <div class="t">${p.title}</div>
+      <div class="p">${fmt(p.price)}${p.compare ? `<s>${fmt(p.compare)}</s>` : ''}</div>
+    </div>`;
+  }).join('');
+  mmAll.onclick = e => { e.preventDefault(); mmHide(); setCat(cat); };
+  mm.classList.add('open');
+  document.querySelectorAll('.nav nav a[data-cat]').forEach(x => x.classList.toggle('hot', x.dataset.cat === cat));
+}
+function mmHide(){
+  mmTimer = setTimeout(() => {
+    mm.classList.remove('open');
+    document.querySelectorAll('.nav nav a[data-cat]').forEach(x => x.classList.remove('hot'));
+  }, 120);
+}
+document.querySelectorAll('.nav nav a[data-cat]').forEach(a => {
+  a.addEventListener('mouseenter', () => mmShow(a.dataset.cat));
+  a.addEventListener('mouseleave', mmHide);
+});
+mm.addEventListener('mouseenter', () => clearTimeout(mmTimer));
+mm.addEventListener('mouseleave', mmHide);
+/* featured strip — 4 biggest-discount products right under the header */
+function renderFeat(){
+  const top = [...PRODUCTS].sort((a,b) => discount(b) - discount(a)).slice(0, 4);
+  document.getElementById('feat').innerHTML = top.map(p => {
+    const d = discount(p);
+    return `<div class="fcard" onclick="openModal('${p.handle}')">
+      <div class="img"><img src="${p.image}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.style.opacity=.25"></div>
+      <div class="body">
+        <div class="t">${p.title}</div>
+        <div class="p">${fmt(p.price)}${p.compare ? `<s>${fmt(p.compare)}</s>` : ''}</div>
+        <button class="add" onclick="event.stopPropagation();addToCart('${p.handle}',1)">Add to cart</button>
+      </div>
+    </div>`;
+  }).join('');
+}
 function setCat(c) {
   curCat = c;
   document.querySelectorAll('.chip').forEach(ch => ch.classList.toggle('on', ch.textContent === (c === 'All' ? 'All products' : c)));
@@ -476,7 +532,7 @@ function toggleCart(open){
   if (open) renderCart();
 }
 document.getElementById('cartBtn').onclick = () => toggleCart(true);
-render(); renderTrend(); renderCart();
+render(); renderTrend(); renderFeat(); renderCart();
 </script>
 </body>
 </html>
