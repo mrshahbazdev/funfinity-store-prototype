@@ -13,12 +13,13 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 h1,h2,h3,.disp{font-family:Archivo,sans-serif}
-/* marquee */
+/* marquee — seamless loop: content duplicated, animate -50% */
 .marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:9px 0;font-family:Archivo;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase}
-.marquee span{display:inline-block;padding-left:100%;animation:mq 22s linear infinite}
-@keyframes mq{to{transform:translateX(-100%)}}
-/* header */
-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.marquee .track{display:inline-flex;animation:mq 26s linear infinite}
+.marquee .track span{padding-right:0}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* header — solid white, no see-through */
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
 .nav{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:30px;padding:16px 24px}
 .logo{font-family:Archivo;font-weight:900;font-size:26px;letter-spacing:-.02em}
 .logo i{color:var(--acc);font-style:normal}
@@ -30,15 +31,14 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .search input{border:0;outline:0;font-size:14px;width:100%;background:transparent}
 .cartbtn{position:relative;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700}
 .cartbtn b{position:absolute;top:-7px;right:-7px;background:var(--acc);color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-/* hero */
-.hero{position:relative;min-height:640px;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.42) 62%,rgba(0,0,0,.78) 100%)}
-.hero .in{position:relative;z-index:2;max-width:1360px;margin:0 auto;width:100%;padding:0 24px 54px}
+/* hero — split editorial: dark panel + photo card (square product photos crop badly full-bleed) */
+.hero{background:var(--ink);color:#fff;overflow:hidden}
+.hero .wrap{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:0;padding:0 24px;align-items:stretch}
+.hero .txt{padding:76px 48px 76px 0;display:flex;flex-direction:column;justify-content:center}
 .kicker{font-family:Archivo;font-weight:700;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:#ffd9d2}
-.hero h1{font-size:clamp(52px,8.2vw,108px);line-height:.94;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;margin:14px 0 18px}
+.hero h1{font-size:clamp(48px,6.4vw,88px);line-height:.94;font-weight:900;letter-spacing:-.03em;text-transform:uppercase;margin:14px 0 18px}
 .hero h1 span{color:#ffb3a6}
-.hero p{font-size:17px;line-height:1.6;max-width:560px;color:#f2ede6}
+.hero p{font-size:17px;line-height:1.6;max-width:520px;color:#d8d2c8}
 .hero .cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 .btn{display:inline-block;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:15px 30px;font-size:15px;font-weight:700}
 .btn.dark{background:var(--ink);color:#fff}
@@ -47,6 +47,9 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .hero .meta{display:flex;gap:36px;margin-top:34px;flex-wrap:wrap}
 .hero .meta b{font-family:Archivo;font-size:28px;display:block}
 .hero .meta span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#d8d2c8}
+.hero .photo{position:relative;min-height:560px}
+.hero .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.hero .photo .tag{position:absolute;left:18px;bottom:18px;background:#fff;color:var(--ink);border-radius:999px;padding:10px 16px;font-size:13.5px;font-weight:700;z-index:2}
 /* category tiles */
 .section{max-width:1360px;margin:0 auto;padding:56px 24px 8px}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -86,11 +89,13 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 /* editorial banner */
 .editorial{max-width:1360px;margin:0 auto;padding:56px 24px}
 .ed{display:grid;grid-template-columns:1fr 1fr;border-radius:22px;overflow:hidden;background:var(--ink);color:#fff}
-.ed img{width:100%;height:100%;object-fit:cover;min-height:420px}
-.ed .txt{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+.ed img{width:100%;height:100%;object-fit:cover;min-height:340px}
+.ed .txt{padding:48px;display:flex;flex-direction:column;justify-content:center}
 .ed .txt h3{font-size:clamp(30px,3.6vw,46px);font-weight:900;text-transform:uppercase;line-height:1.02;letter-spacing:-.02em}
 .ed .txt h3 span{color:#ffb3a6}
-.ed .txt p{color:#d8d2c8;line-height:1.65;margin:16px 0 26px;font-size:15.5px}
+.ed .txt p{color:#d8d2c8;line-height:1.65;margin:16px 0 22px;font-size:15.5px}
+.ed .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.ed .chips span{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;color:#f2ede6}
 .benefits{max-width:1360px;margin:0 auto;padding:0 24px 56px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .ben{border:1px solid var(--line);border-radius:16px;padding:22px}
 .ben .ic{font-size:26px}
@@ -132,11 +137,11 @@ footer .big{font-family:Archivo;font-weight:900;font-size:clamp(40px,6vw,72px);c
 footer .big i{color:var(--acc);font-style:normal}
 footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;font-size:12.5px;color:#8d857a}
 .proto{max-width:1360px;margin:0 auto;padding:12px 24px 0;font-size:12.5px;color:var(--mut)}
-@media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.sheet{grid-template-columns:1fr}.ed{grid-template-columns:1fr}.benefits{grid-template-columns:repeat(2,1fr)}.nav nav{display:none}.search{min-width:0;flex:1}.hero{min-height:520px}footer .in{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.sheet{grid-template-columns:1fr}.ed{grid-template-columns:1fr}.benefits{grid-template-columns:repeat(2,1fr)}.nav nav{display:none}.search{min-width:0;flex:1}.hero .wrap{grid-template-columns:1fr}.hero .txt{padding:48px 0 32px}.hero .photo{min-height:420px}footer .in{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<div class="marquee"><span>New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp; New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp;</span></div>
+<div class="marquee"><div class="track"><span>New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp; New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp;</span><span>New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp; New winter drop &nbsp;✦&nbsp; Free delivery over EGP 1,000 &nbsp;✦&nbsp; Cash on delivery &nbsp;✦&nbsp; 44 styles on sale &nbsp;✦&nbsp;</span></div></div>
 <header><div class="nav">
   <a class="logo" href="#">FUNFINITY<i>.</i></a>
   <nav>
@@ -151,19 +156,24 @@ footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;fo
 </div></header>
 
 <section class="hero">
-  <img src="https://cdn.shopify.com/s/files/1/0987/8346/1508/files/BB4836BF-E21E-46AE-ACF3-A3BF0737A695_800x_e7357121-e2f7-4ac6-b586-92508080008b.webp?v=1769979763" alt="قفطان ذهبي مطرّز – فخامة وراحة في تصميم واحد">
-  <div class="in">
-    <div class="kicker">Funfinity — Winter 2026</div>
-    <h1>Wear the<br>new season<span>.</span></h1>
-    <p>Abayas, kaftans, dresses and cosy sets — 60 real styles from the Funfinity catalogue, now in a store built to move fast and look sharp.</p>
-    <div class="cta">
-      <button class="btn" onclick="scrollToGrid()">Shop new in ↓</button>
-      <button class="btn ghost" onclick="setCat('Kaftans')">Kaftans</button>
+  <div class="wrap">
+    <div class="txt">
+      <div class="kicker">Funfinity — Winter 2026</div>
+      <h1>Wear the<br>new season<span>.</span></h1>
+      <p>Abayas, kaftans, dresses and cosy sets — 60 real styles from the Funfinity catalogue, now in a store built to move fast and look sharp.</p>
+      <div class="cta">
+        <button class="btn" onclick="scrollToGrid()">Shop new in ↓</button>
+        <button class="btn ghost" onclick="setCat('Kaftans')">Kaftans</button>
+      </div>
+      <div class="meta">
+        <div><b>60</b><span>Products</span></div>
+        <div><b>283</b><span>Variants</span></div>
+        <div><b>44</b><span>On sale</span></div>
+      </div>
     </div>
-    <div class="meta">
-      <div><b>60</b><span>Products</span></div>
-      <div><b>283</b><span>Variants</span></div>
-      <div><b>44</b><span>On sale</span></div>
+    <div class="photo">
+      <img src="https://cdn.shopify.com/s/files/1/0987/8346/1508/files/BB4836BF-E21E-46AE-ACF3-A3BF0737A695_800x_e7357121-e2f7-4ac6-b586-92508080008b.webp?v=1769979763" alt="قفطان ذهبي مطرّز – فخامة وراحة في تصميم واحد">
+      <span class="tag">✦ Golden Embroidered Kaftan — the season's icon</span>
     </div>
   </div>
 </section>
@@ -204,6 +214,7 @@ footer .fine{border-top:1px solid #33302c;padding:16px 24px;text-align:center;fo
     <h3>Soft fabrics.<br><span>Strong looks.</span></h3>
     <p>Chenille, velvet and heavy knits — the pieces our customers keep coming back for. Warm, modest and made to be worn every day, not saved for special occasions.</p>
     <div><button class="btn acc" onclick="setCat('Dresses')">Shop dresses →</button></div>
+    <div class="chips"><span>Chenille</span><span>Velvet</span><span>Heavy knits</span><span>44 on sale</span></div>
   </div>
 </div></section>
 
