@@ -136,7 +136,7 @@ header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid 
 .price{font-size:16.5px;font-weight:800}
 .price s{color:var(--mut);font-weight:500;font-size:13.5px;margin-left:6px}
 .price .save{color:var(--green);font-size:12.5px;font-weight:700;margin-left:6px}
-.opts{font-size:12.5px;color:var(--mut)}
+.opts{font-size:12.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .add{margin-top:auto;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:11px;font-size:14px;font-weight:700;transition:background .2s}
 .add:hover{background:var(--acc)}
 .empty{padding:60px 0;text-align:center;color:var(--mut)}
@@ -190,10 +190,10 @@ footer{background:var(--ink);color:#e7e0d6}
 .news{max-width:1360px;margin:0 auto;padding:52px 24px 0;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .news h3{font-size:clamp(26px,3.4vw,40px);font-weight:900;text-transform:uppercase;color:#fff;line-height:1.05}
 .news h3 .serif{font-size:.85em;text-transform:none;color:#ffb3a6}
-.news form{display:flex;gap:0;background:#22201e;border:1px solid #3a3733;border-radius:999px;padding:5px;min-width:min(440px,100%)}
-.news input{flex:1;background:transparent;border:0;outline:0;color:#fff;font-size:14.5px;padding:10px 16px}
+.news form{display:flex;gap:0;background:#22201e;border:1px solid #3a3733;border-radius:999px;padding:5px;min-width:min(440px,100%);overflow:hidden}
+.news input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;font-size:14.5px;padding:10px 16px}
 .news input::placeholder{color:#8d857a}
-.news button{background:#fff;color:var(--ink);border:0;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px}
+.news button{background:#fff;color:var(--ink);border:0;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;flex-shrink:0}
 footer .in{max-width:1360px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
 footer h4{font-family:Archivo;color:#fff;font-size:15px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
 footer p,footer li{font-size:14px;line-height:1.75;color:#b9b2a6;list-style:none}
@@ -385,7 +385,7 @@ document.getElementById('sort').addEventListener('change', e => { curSort = e.ta
 function discount(p){ return p.compare && p.compare > p.price ? Math.round((1 - p.price / p.compare) * 100) : 0; }
 function cardHTML(p, i){
   const d = discount(p);
-  const opts = [...(p.opt1||[]), ...(p.opt2||[])].slice(0,4).join(' · ');
+  const opts = [...(p.opt1||[]), ...(p.opt2||[])].slice(0,3).join(' · ');
   return `<article class="card rv" style="transition-delay:${Math.min(i,8)*60}ms">
     <div class="img" onclick="openModal('${p.handle}')">
       <img src="${p.image}" alt="${p.title.replace(/"/g,'')}" loading="lazy" onerror="this.style.opacity=.25">
